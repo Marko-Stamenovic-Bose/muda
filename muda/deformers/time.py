@@ -3,9 +3,8 @@
 # CREATED:2015-02-02 10:09:43 by Brian McFee <brian.mcfee@nyu.edu>
 '''Time stretching deformations'''
 
-import pyrubberband as pyrb
+import librosa
 import numpy as np
-import pandas as pd
 
 from ..base import BaseTransformer
 
@@ -32,9 +31,8 @@ class AbstractTimeStretch(BaseTransformer):
     @staticmethod
     def audio(mudabox, state):
         # Deform the audio and metadata
-        mudabox._audio['y'] = pyrb.time_stretch(mudabox._audio['y'],
-                                                mudabox._audio['sr'],
-                                                state['rate'])
+        mudabox._audio['y'] = librosa.effects.time_stretch(y=mudabox._audio['y'],
+                                                           rate=state['rate'])
 
     @staticmethod
     def metadata(metadata, state):

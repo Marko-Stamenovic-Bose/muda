@@ -4,7 +4,7 @@
 '''Pitch deformation algorithms'''
 
 import librosa
-import pyrubberband as pyrb
+# import pyrubberband as pyrb
 import re
 import numpy as np
 import six
@@ -73,9 +73,9 @@ class AbstractPitchShift(BaseTransformer):
 
     @staticmethod
     def audio(mudabox, state):
-        mudabox._audio['y'] = pyrb.pitch_shift(mudabox._audio['y'],
-                                               mudabox._audio['sr'],
-                                               state['n_semitones'])
+        mudabox._audio['y'] = librosa.effects.pitch_shift(y=mudabox._audio['y'],
+                                                          sr=mudabox._audio['sr'],
+                                                          n_steps=state['n_semitones'])
 
     @staticmethod
     def deform_frequency(annotation, state):
